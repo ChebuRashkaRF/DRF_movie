@@ -60,7 +60,7 @@ docker exec -i db_drf psql -U drfuser drfmovie < ./backup_db/drfmovie_backup.dum
 
 1. Чтобы работала отправка email с подтверждением, необходимо настроить бесплатный SMTP Сервер от Google, для этого нужно выполнить **Шаг 1** в [инструкции](https://www.hostinger.com.ua/rukovodstva/kak-ispolzovat-smtp-server "бесплатный SMTP Сервер от Google "), а затем в файле _.env.dev_ указать значения переменным: EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, SEND_ACTIVATION_EMAIL=1
 
-2. Чтобы работал вход на сайт через VK, необходимо создать приложение на сайте _https://vk.com/dev_. Прописать настройки как на изображении: ![VK APP](readme-img/vk_app.jpg "VK APP"). Затем в файле _.env.dev_ указать значения переменным: SOCIAL_AUTH_VK_OAUTH2_KEY, SOCIAL_AUTH_VK_OAUTH2_SECRET. Далее зайти на сайт администратора (http://127.0.0.1/admin) и в _Django OAuth Toolkit_ > _Applications_ нужно добавить запись как на изображении:  
+2. Чтобы работал вход на сайт через VK, необходимо создать приложение на сайте _https://vk.com/dev_. Прописать настройки как на изображении: ![VK APP](readme-img/vk_app.jpg "VK APP") Затем в файле _.env.dev_ указать значения переменным: SOCIAL_AUTH_VK_OAUTH2_KEY, SOCIAL_AUTH_VK_OAUTH2_SECRET. Далее зайти на сайт администратора (http://127.0.0.1/admin) и в _Django OAuth Toolkit_ > _Applications_ нужно добавить запись как на изображении:  
 ![DJANGO VK APP](readme-img/admin_vk_app.jpg "DJANGO VK APP") **_Client id_ и _Client secret_ не изменять, а в качестве _User_ выбирать супер пользователя**
 
 ---
