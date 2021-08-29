@@ -1,0 +1,3229 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.8 (Ubuntu 12.8-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.8 (Ubuntu 12.8-0ubuntu0.20.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO drfuser;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO drfuser;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id bigint NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO drfuser;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO drfuser;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO drfuser;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO drfuser;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(150) NOT NULL,
+    first_name character varying(150) NOT NULL,
+    last_name character varying(150) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO drfuser;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.auth_user_groups (
+    id bigint NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO drfuser;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.auth_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO drfuser;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.auth_user_groups_id_seq OWNED BY public.auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.auth_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO drfuser;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.auth_user_id_seq OWNED BY public.auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.auth_user_user_permissions (
+    id bigint NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO drfuser;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.auth_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO drfuser;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.auth_user_user_permissions_id_seq OWNED BY public.auth_user_user_permissions.id;
+
+
+--
+-- Name: authtoken_token; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.authtoken_token (
+    key character varying(40) NOT NULL,
+    created timestamp with time zone NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE public.authtoken_token OWNER TO drfuser;
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO drfuser;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO drfuser;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO drfuser;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO drfuser;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.django_migrations (
+    id bigint NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO drfuser;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO drfuser;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO drfuser;
+
+--
+-- Name: movies_actor; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.movies_actor (
+    id bigint NOT NULL,
+    name character varying(100) NOT NULL,
+    age smallint NOT NULL,
+    description text NOT NULL,
+    image character varying(100) NOT NULL,
+    CONSTRAINT movies_actor_age_check CHECK ((age >= 0))
+);
+
+
+ALTER TABLE public.movies_actor OWNER TO drfuser;
+
+--
+-- Name: movies_actor_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.movies_actor_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.movies_actor_id_seq OWNER TO drfuser;
+
+--
+-- Name: movies_actor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.movies_actor_id_seq OWNED BY public.movies_actor.id;
+
+
+--
+-- Name: movies_category; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.movies_category (
+    id bigint NOT NULL,
+    name character varying(150) NOT NULL,
+    description text NOT NULL,
+    url character varying(160) NOT NULL
+);
+
+
+ALTER TABLE public.movies_category OWNER TO drfuser;
+
+--
+-- Name: movies_category_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.movies_category_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.movies_category_id_seq OWNER TO drfuser;
+
+--
+-- Name: movies_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.movies_category_id_seq OWNED BY public.movies_category.id;
+
+
+--
+-- Name: movies_genre; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.movies_genre (
+    id bigint NOT NULL,
+    name character varying(100) NOT NULL,
+    description text NOT NULL,
+    url character varying(160) NOT NULL
+);
+
+
+ALTER TABLE public.movies_genre OWNER TO drfuser;
+
+--
+-- Name: movies_genre_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.movies_genre_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.movies_genre_id_seq OWNER TO drfuser;
+
+--
+-- Name: movies_genre_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.movies_genre_id_seq OWNED BY public.movies_genre.id;
+
+
+--
+-- Name: movies_movie; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.movies_movie (
+    id bigint NOT NULL,
+    title character varying(100) NOT NULL,
+    tagline character varying(100) NOT NULL,
+    description text NOT NULL,
+    poster character varying(100) NOT NULL,
+    year smallint NOT NULL,
+    country character varying(30) NOT NULL,
+    world_premiere date NOT NULL,
+    budget integer NOT NULL,
+    fees_in_usa integer NOT NULL,
+    fess_in_world integer NOT NULL,
+    url character varying(130) NOT NULL,
+    draft boolean NOT NULL,
+    category_id bigint,
+    CONSTRAINT movies_movie_budget_check CHECK ((budget >= 0)),
+    CONSTRAINT movies_movie_fees_in_usa_check CHECK ((fees_in_usa >= 0)),
+    CONSTRAINT movies_movie_fess_in_world_check CHECK ((fess_in_world >= 0)),
+    CONSTRAINT movies_movie_year_check CHECK ((year >= 0))
+);
+
+
+ALTER TABLE public.movies_movie OWNER TO drfuser;
+
+--
+-- Name: movies_movie_actors; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.movies_movie_actors (
+    id bigint NOT NULL,
+    movie_id bigint NOT NULL,
+    actor_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.movies_movie_actors OWNER TO drfuser;
+
+--
+-- Name: movies_movie_actors_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.movies_movie_actors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.movies_movie_actors_id_seq OWNER TO drfuser;
+
+--
+-- Name: movies_movie_actors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.movies_movie_actors_id_seq OWNED BY public.movies_movie_actors.id;
+
+
+--
+-- Name: movies_movie_directors; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.movies_movie_directors (
+    id bigint NOT NULL,
+    movie_id bigint NOT NULL,
+    actor_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.movies_movie_directors OWNER TO drfuser;
+
+--
+-- Name: movies_movie_directors_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.movies_movie_directors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.movies_movie_directors_id_seq OWNER TO drfuser;
+
+--
+-- Name: movies_movie_directors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.movies_movie_directors_id_seq OWNED BY public.movies_movie_directors.id;
+
+
+--
+-- Name: movies_movie_genres; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.movies_movie_genres (
+    id bigint NOT NULL,
+    movie_id bigint NOT NULL,
+    genre_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.movies_movie_genres OWNER TO drfuser;
+
+--
+-- Name: movies_movie_genres_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.movies_movie_genres_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.movies_movie_genres_id_seq OWNER TO drfuser;
+
+--
+-- Name: movies_movie_genres_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.movies_movie_genres_id_seq OWNED BY public.movies_movie_genres.id;
+
+
+--
+-- Name: movies_movie_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.movies_movie_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.movies_movie_id_seq OWNER TO drfuser;
+
+--
+-- Name: movies_movie_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.movies_movie_id_seq OWNED BY public.movies_movie.id;
+
+
+--
+-- Name: movies_movieshots; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.movies_movieshots (
+    id bigint NOT NULL,
+    title character varying(100) NOT NULL,
+    description text NOT NULL,
+    image character varying(100) NOT NULL,
+    movie_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.movies_movieshots OWNER TO drfuser;
+
+--
+-- Name: movies_movieshots_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.movies_movieshots_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.movies_movieshots_id_seq OWNER TO drfuser;
+
+--
+-- Name: movies_movieshots_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.movies_movieshots_id_seq OWNED BY public.movies_movieshots.id;
+
+
+--
+-- Name: movies_rating; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.movies_rating (
+    id bigint NOT NULL,
+    ip character varying(15) NOT NULL,
+    movie_id bigint NOT NULL,
+    star_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.movies_rating OWNER TO drfuser;
+
+--
+-- Name: movies_rating_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.movies_rating_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.movies_rating_id_seq OWNER TO drfuser;
+
+--
+-- Name: movies_rating_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.movies_rating_id_seq OWNED BY public.movies_rating.id;
+
+
+--
+-- Name: movies_ratingstar; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.movies_ratingstar (
+    id bigint NOT NULL,
+    value smallint NOT NULL
+);
+
+
+ALTER TABLE public.movies_ratingstar OWNER TO drfuser;
+
+--
+-- Name: movies_ratingstar_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.movies_ratingstar_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.movies_ratingstar_id_seq OWNER TO drfuser;
+
+--
+-- Name: movies_ratingstar_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.movies_ratingstar_id_seq OWNED BY public.movies_ratingstar.id;
+
+
+--
+-- Name: movies_review; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.movies_review (
+    id bigint NOT NULL,
+    email character varying(254) NOT NULL,
+    name character varying(100) NOT NULL,
+    text text NOT NULL,
+    movie_id bigint NOT NULL,
+    parent_id bigint
+);
+
+
+ALTER TABLE public.movies_review OWNER TO drfuser;
+
+--
+-- Name: movies_review_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.movies_review_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.movies_review_id_seq OWNER TO drfuser;
+
+--
+-- Name: movies_review_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.movies_review_id_seq OWNED BY public.movies_review.id;
+
+
+--
+-- Name: oauth2_provider_accesstoken; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.oauth2_provider_accesstoken (
+    id bigint NOT NULL,
+    token character varying(255) NOT NULL,
+    expires timestamp with time zone NOT NULL,
+    scope text NOT NULL,
+    application_id bigint,
+    user_id integer,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL,
+    source_refresh_token_id bigint,
+    id_token_id bigint
+);
+
+
+ALTER TABLE public.oauth2_provider_accesstoken OWNER TO drfuser;
+
+--
+-- Name: oauth2_provider_accesstoken_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.oauth2_provider_accesstoken_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.oauth2_provider_accesstoken_id_seq OWNER TO drfuser;
+
+--
+-- Name: oauth2_provider_accesstoken_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.oauth2_provider_accesstoken_id_seq OWNED BY public.oauth2_provider_accesstoken.id;
+
+
+--
+-- Name: oauth2_provider_application; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.oauth2_provider_application (
+    id bigint NOT NULL,
+    client_id character varying(100) NOT NULL,
+    redirect_uris text NOT NULL,
+    client_type character varying(32) NOT NULL,
+    authorization_grant_type character varying(32) NOT NULL,
+    client_secret character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    user_id integer,
+    skip_authorization boolean NOT NULL,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL,
+    algorithm character varying(5) NOT NULL
+);
+
+
+ALTER TABLE public.oauth2_provider_application OWNER TO drfuser;
+
+--
+-- Name: oauth2_provider_application_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.oauth2_provider_application_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.oauth2_provider_application_id_seq OWNER TO drfuser;
+
+--
+-- Name: oauth2_provider_application_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.oauth2_provider_application_id_seq OWNED BY public.oauth2_provider_application.id;
+
+
+--
+-- Name: oauth2_provider_grant; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.oauth2_provider_grant (
+    id bigint NOT NULL,
+    code character varying(255) NOT NULL,
+    expires timestamp with time zone NOT NULL,
+    redirect_uri text NOT NULL,
+    scope text NOT NULL,
+    application_id bigint NOT NULL,
+    user_id integer NOT NULL,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL,
+    code_challenge character varying(128) NOT NULL,
+    code_challenge_method character varying(10) NOT NULL,
+    nonce character varying(255) NOT NULL,
+    claims text NOT NULL
+);
+
+
+ALTER TABLE public.oauth2_provider_grant OWNER TO drfuser;
+
+--
+-- Name: oauth2_provider_grant_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.oauth2_provider_grant_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.oauth2_provider_grant_id_seq OWNER TO drfuser;
+
+--
+-- Name: oauth2_provider_grant_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.oauth2_provider_grant_id_seq OWNED BY public.oauth2_provider_grant.id;
+
+
+--
+-- Name: oauth2_provider_idtoken; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.oauth2_provider_idtoken (
+    id bigint NOT NULL,
+    jti uuid NOT NULL,
+    expires timestamp with time zone NOT NULL,
+    scope text NOT NULL,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL,
+    application_id bigint,
+    user_id integer
+);
+
+
+ALTER TABLE public.oauth2_provider_idtoken OWNER TO drfuser;
+
+--
+-- Name: oauth2_provider_idtoken_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.oauth2_provider_idtoken_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.oauth2_provider_idtoken_id_seq OWNER TO drfuser;
+
+--
+-- Name: oauth2_provider_idtoken_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.oauth2_provider_idtoken_id_seq OWNED BY public.oauth2_provider_idtoken.id;
+
+
+--
+-- Name: oauth2_provider_refreshtoken; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.oauth2_provider_refreshtoken (
+    id bigint NOT NULL,
+    token character varying(255) NOT NULL,
+    access_token_id bigint,
+    application_id bigint NOT NULL,
+    user_id integer NOT NULL,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL,
+    revoked timestamp with time zone
+);
+
+
+ALTER TABLE public.oauth2_provider_refreshtoken OWNER TO drfuser;
+
+--
+-- Name: oauth2_provider_refreshtoken_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.oauth2_provider_refreshtoken_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.oauth2_provider_refreshtoken_id_seq OWNER TO drfuser;
+
+--
+-- Name: oauth2_provider_refreshtoken_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.oauth2_provider_refreshtoken_id_seq OWNED BY public.oauth2_provider_refreshtoken.id;
+
+
+--
+-- Name: social_auth_association; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.social_auth_association (
+    id integer NOT NULL,
+    server_url character varying(255) NOT NULL,
+    handle character varying(255) NOT NULL,
+    secret character varying(255) NOT NULL,
+    issued integer NOT NULL,
+    lifetime integer NOT NULL,
+    assoc_type character varying(64) NOT NULL
+);
+
+
+ALTER TABLE public.social_auth_association OWNER TO drfuser;
+
+--
+-- Name: social_auth_association_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.social_auth_association_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.social_auth_association_id_seq OWNER TO drfuser;
+
+--
+-- Name: social_auth_association_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.social_auth_association_id_seq OWNED BY public.social_auth_association.id;
+
+
+--
+-- Name: social_auth_code; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.social_auth_code (
+    id integer NOT NULL,
+    email character varying(254) NOT NULL,
+    code character varying(32) NOT NULL,
+    verified boolean NOT NULL,
+    "timestamp" timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.social_auth_code OWNER TO drfuser;
+
+--
+-- Name: social_auth_code_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.social_auth_code_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.social_auth_code_id_seq OWNER TO drfuser;
+
+--
+-- Name: social_auth_code_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.social_auth_code_id_seq OWNED BY public.social_auth_code.id;
+
+
+--
+-- Name: social_auth_nonce; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.social_auth_nonce (
+    id integer NOT NULL,
+    server_url character varying(255) NOT NULL,
+    "timestamp" integer NOT NULL,
+    salt character varying(65) NOT NULL
+);
+
+
+ALTER TABLE public.social_auth_nonce OWNER TO drfuser;
+
+--
+-- Name: social_auth_nonce_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.social_auth_nonce_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.social_auth_nonce_id_seq OWNER TO drfuser;
+
+--
+-- Name: social_auth_nonce_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.social_auth_nonce_id_seq OWNED BY public.social_auth_nonce.id;
+
+
+--
+-- Name: social_auth_partial; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.social_auth_partial (
+    id integer NOT NULL,
+    token character varying(32) NOT NULL,
+    next_step smallint NOT NULL,
+    backend character varying(32) NOT NULL,
+    data text NOT NULL,
+    "timestamp" timestamp with time zone NOT NULL,
+    CONSTRAINT social_auth_partial_next_step_check CHECK ((next_step >= 0))
+);
+
+
+ALTER TABLE public.social_auth_partial OWNER TO drfuser;
+
+--
+-- Name: social_auth_partial_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.social_auth_partial_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.social_auth_partial_id_seq OWNER TO drfuser;
+
+--
+-- Name: social_auth_partial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.social_auth_partial_id_seq OWNED BY public.social_auth_partial.id;
+
+
+--
+-- Name: social_auth_usersocialauth; Type: TABLE; Schema: public; Owner: drfuser
+--
+
+CREATE TABLE public.social_auth_usersocialauth (
+    id integer NOT NULL,
+    provider character varying(32) NOT NULL,
+    uid character varying(255) NOT NULL,
+    extra_data text NOT NULL,
+    user_id integer NOT NULL,
+    created timestamp with time zone NOT NULL,
+    modified timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.social_auth_usersocialauth OWNER TO drfuser;
+
+--
+-- Name: social_auth_usersocialauth_id_seq; Type: SEQUENCE; Schema: public; Owner: drfuser
+--
+
+CREATE SEQUENCE public.social_auth_usersocialauth_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.social_auth_usersocialauth_id_seq OWNER TO drfuser;
+
+--
+-- Name: social_auth_usersocialauth_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drfuser
+--
+
+ALTER SEQUENCE public.social_auth_usersocialauth_id_seq OWNED BY public.social_auth_usersocialauth.id;
+
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: auth_user id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_user ALTER COLUMN id SET DEFAULT nextval('public.auth_user_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_groups id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_user_groups ALTER COLUMN id SET DEFAULT nextval('public.auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: movies_actor id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_actor ALTER COLUMN id SET DEFAULT nextval('public.movies_actor_id_seq'::regclass);
+
+
+--
+-- Name: movies_category id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_category ALTER COLUMN id SET DEFAULT nextval('public.movies_category_id_seq'::regclass);
+
+
+--
+-- Name: movies_genre id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_genre ALTER COLUMN id SET DEFAULT nextval('public.movies_genre_id_seq'::regclass);
+
+
+--
+-- Name: movies_movie id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie ALTER COLUMN id SET DEFAULT nextval('public.movies_movie_id_seq'::regclass);
+
+
+--
+-- Name: movies_movie_actors id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie_actors ALTER COLUMN id SET DEFAULT nextval('public.movies_movie_actors_id_seq'::regclass);
+
+
+--
+-- Name: movies_movie_directors id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie_directors ALTER COLUMN id SET DEFAULT nextval('public.movies_movie_directors_id_seq'::regclass);
+
+
+--
+-- Name: movies_movie_genres id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie_genres ALTER COLUMN id SET DEFAULT nextval('public.movies_movie_genres_id_seq'::regclass);
+
+
+--
+-- Name: movies_movieshots id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movieshots ALTER COLUMN id SET DEFAULT nextval('public.movies_movieshots_id_seq'::regclass);
+
+
+--
+-- Name: movies_rating id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_rating ALTER COLUMN id SET DEFAULT nextval('public.movies_rating_id_seq'::regclass);
+
+
+--
+-- Name: movies_ratingstar id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_ratingstar ALTER COLUMN id SET DEFAULT nextval('public.movies_ratingstar_id_seq'::regclass);
+
+
+--
+-- Name: movies_review id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_review ALTER COLUMN id SET DEFAULT nextval('public.movies_review_id_seq'::regclass);
+
+
+--
+-- Name: oauth2_provider_accesstoken id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_accesstoken ALTER COLUMN id SET DEFAULT nextval('public.oauth2_provider_accesstoken_id_seq'::regclass);
+
+
+--
+-- Name: oauth2_provider_application id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_application ALTER COLUMN id SET DEFAULT nextval('public.oauth2_provider_application_id_seq'::regclass);
+
+
+--
+-- Name: oauth2_provider_grant id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_grant ALTER COLUMN id SET DEFAULT nextval('public.oauth2_provider_grant_id_seq'::regclass);
+
+
+--
+-- Name: oauth2_provider_idtoken id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_idtoken ALTER COLUMN id SET DEFAULT nextval('public.oauth2_provider_idtoken_id_seq'::regclass);
+
+
+--
+-- Name: oauth2_provider_refreshtoken id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_refreshtoken ALTER COLUMN id SET DEFAULT nextval('public.oauth2_provider_refreshtoken_id_seq'::regclass);
+
+
+--
+-- Name: social_auth_association id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.social_auth_association ALTER COLUMN id SET DEFAULT nextval('public.social_auth_association_id_seq'::regclass);
+
+
+--
+-- Name: social_auth_code id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.social_auth_code ALTER COLUMN id SET DEFAULT nextval('public.social_auth_code_id_seq'::regclass);
+
+
+--
+-- Name: social_auth_nonce id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.social_auth_nonce ALTER COLUMN id SET DEFAULT nextval('public.social_auth_nonce_id_seq'::regclass);
+
+
+--
+-- Name: social_auth_partial id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.social_auth_partial ALTER COLUMN id SET DEFAULT nextval('public.social_auth_partial_id_seq'::regclass);
+
+
+--
+-- Name: social_auth_usersocialauth id; Type: DEFAULT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.social_auth_usersocialauth ALTER COLUMN id SET DEFAULT nextval('public.social_auth_usersocialauth_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can view log entry	1	view_logentry
+5	Can add permission	2	add_permission
+6	Can change permission	2	change_permission
+7	Can delete permission	2	delete_permission
+8	Can view permission	2	view_permission
+9	Can add group	3	add_group
+10	Can change group	3	change_group
+11	Can delete group	3	delete_group
+12	Can view group	3	view_group
+13	Can add user	4	add_user
+14	Can change user	4	change_user
+15	Can delete user	4	delete_user
+16	Can view user	4	view_user
+17	Can add content type	5	add_contenttype
+18	Can change content type	5	change_contenttype
+19	Can delete content type	5	delete_contenttype
+20	Can view content type	5	view_contenttype
+21	Can add session	6	add_session
+22	Can change session	6	change_session
+23	Can delete session	6	delete_session
+24	Can view session	6	view_session
+25	Can add Жанр	7	add_genre
+26	Can change Жанр	7	change_genre
+27	Can delete Жанр	7	delete_genre
+28	Can view Жанр	7	view_genre
+29	Can add Кадр из фильма	8	add_movieshots
+30	Can change Кадр из фильма	8	change_movieshots
+31	Can delete Кадр из фильма	8	delete_movieshots
+32	Can view Кадр из фильма	8	view_movieshots
+33	Can add Фильм	9	add_movie
+34	Can change Фильм	9	change_movie
+35	Can delete Фильм	9	delete_movie
+36	Can view Фильм	9	view_movie
+37	Can add Категория	10	add_category
+38	Can change Категория	10	change_category
+39	Can delete Категория	10	delete_category
+40	Can view Категория	10	view_category
+41	Can add Отзыв	11	add_review
+42	Can change Отзыв	11	change_review
+43	Can delete Отзыв	11	delete_review
+44	Can view Отзыв	11	view_review
+45	Can add Звезда рейтинга	12	add_ratingstar
+46	Can change Звезда рейтинга	12	change_ratingstar
+47	Can delete Звезда рейтинга	12	delete_ratingstar
+48	Can view Звезда рейтинга	12	view_ratingstar
+49	Can add Рейтинг	13	add_rating
+50	Can change Рейтинг	13	change_rating
+51	Can delete Рейтинг	13	delete_rating
+52	Can view Рейтинг	13	view_rating
+53	Can add Актеры и режиссеры	14	add_actor
+54	Can change Актеры и режиссеры	14	change_actor
+55	Can delete Актеры и режиссеры	14	delete_actor
+56	Can view Актеры и режиссеры	14	view_actor
+57	Can add Token	15	add_token
+58	Can change Token	15	change_token
+59	Can delete Token	15	delete_token
+60	Can view Token	15	view_token
+61	Can add token	16	add_tokenproxy
+62	Can change token	16	change_tokenproxy
+63	Can delete token	16	delete_tokenproxy
+64	Can view token	16	view_tokenproxy
+65	Can add application	17	add_application
+66	Can change application	17	change_application
+67	Can delete application	17	delete_application
+68	Can view application	17	view_application
+69	Can add access token	18	add_accesstoken
+70	Can change access token	18	change_accesstoken
+71	Can delete access token	18	delete_accesstoken
+72	Can view access token	18	view_accesstoken
+73	Can add grant	19	add_grant
+74	Can change grant	19	change_grant
+75	Can delete grant	19	delete_grant
+76	Can view grant	19	view_grant
+77	Can add refresh token	20	add_refreshtoken
+78	Can change refresh token	20	change_refreshtoken
+79	Can delete refresh token	20	delete_refreshtoken
+80	Can view refresh token	20	view_refreshtoken
+81	Can add id token	21	add_idtoken
+82	Can change id token	21	change_idtoken
+83	Can delete id token	21	delete_idtoken
+84	Can view id token	21	view_idtoken
+85	Can add association	22	add_association
+86	Can change association	22	change_association
+87	Can delete association	22	delete_association
+88	Can view association	22	view_association
+89	Can add code	23	add_code
+90	Can change code	23	change_code
+91	Can delete code	23	delete_code
+92	Can view code	23	view_code
+93	Can add nonce	24	add_nonce
+94	Can change nonce	24	change_nonce
+95	Can delete nonce	24	delete_nonce
+96	Can view nonce	24	view_nonce
+97	Can add user social auth	25	add_usersocialauth
+98	Can change user social auth	25	change_usersocialauth
+99	Can delete user social auth	25	delete_usersocialauth
+100	Can view user social auth	25	view_usersocialauth
+101	Can add partial	26	add_partial
+102	Can change partial	26	change_partial
+103	Can delete partial	26	delete_partial
+104	Can view partial	26	view_partial
+\.
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+6	pbkdf2_sha256$260000$oer0vdYoWwDxO74MTLRIr4$E2ezYG7p8oy0leKASDlmIR61SrEmgw7x04JRQygMGPU=	2021-08-27 15:02:28.427427+00	t	admin111				t	t	2021-08-27 15:01:51.727535+00
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: authtoken_token; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.authtoken_token (key, created, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+52	2021-08-27 15:02:40.543507+00	1	admin	3		4	6
+\.
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	auth	user
+5	contenttypes	contenttype
+6	sessions	session
+7	movies	genre
+8	movies	movieshots
+9	movies	movie
+10	movies	category
+11	movies	review
+12	movies	ratingstar
+13	movies	rating
+14	movies	actor
+15	authtoken	token
+16	authtoken	tokenproxy
+17	oauth2_provider	application
+18	oauth2_provider	accesstoken
+19	oauth2_provider	grant
+20	oauth2_provider	refreshtoken
+21	oauth2_provider	idtoken
+22	social_django	association
+23	social_django	code
+24	social_django	nonce
+25	social_django	usersocialauth
+26	social_django	partial
+\.
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2021-08-16 18:36:18.86121+00
+2	auth	0001_initial	2021-08-16 18:36:18.939259+00
+3	admin	0001_initial	2021-08-16 18:36:18.965985+00
+4	admin	0002_logentry_remove_auto_add	2021-08-16 18:36:18.976927+00
+5	admin	0003_logentry_add_action_flag_choices	2021-08-16 18:36:18.991151+00
+6	contenttypes	0002_remove_content_type_name	2021-08-16 18:36:19.017712+00
+7	auth	0002_alter_permission_name_max_length	2021-08-16 18:36:19.03002+00
+8	auth	0003_alter_user_email_max_length	2021-08-16 18:36:19.041654+00
+9	auth	0004_alter_user_username_opts	2021-08-16 18:36:19.053804+00
+10	auth	0005_alter_user_last_login_null	2021-08-16 18:36:19.069252+00
+11	auth	0006_require_contenttypes_0002	2021-08-16 18:36:19.073059+00
+12	auth	0007_alter_validators_add_error_messages	2021-08-16 18:36:19.083884+00
+13	auth	0008_alter_user_username_max_length	2021-08-16 18:36:19.107572+00
+14	auth	0009_alter_user_last_name_max_length	2021-08-16 18:36:19.121243+00
+15	auth	0010_alter_group_name_max_length	2021-08-16 18:36:19.156778+00
+16	auth	0011_update_proxy_permissions	2021-08-16 18:36:19.170754+00
+17	auth	0012_alter_user_first_name_max_length	2021-08-16 18:36:19.186324+00
+18	sessions	0001_initial	2021-08-16 18:36:19.205609+00
+19	movies	0001_initial	2021-08-16 18:57:36.233144+00
+20	authtoken	0001_initial	2021-08-17 23:24:35.202626+00
+21	authtoken	0002_auto_20160226_1747	2021-08-17 23:24:35.32131+00
+22	authtoken	0003_tokenproxy	2021-08-17 23:24:35.327296+00
+23	oauth2_provider	0001_initial	2021-08-18 12:28:38.86796+00
+24	oauth2_provider	0002_auto_20190406_1805	2021-08-18 12:28:38.932623+00
+25	oauth2_provider	0003_auto_20201211_1314	2021-08-18 12:28:38.954386+00
+26	oauth2_provider	0004_auto_20200902_2022	2021-08-18 12:28:39.119109+00
+27	default	0001_initial	2021-08-18 12:28:39.226203+00
+28	social_auth	0001_initial	2021-08-18 12:28:39.228368+00
+29	default	0002_add_related_name	2021-08-18 12:28:39.250237+00
+30	social_auth	0002_add_related_name	2021-08-18 12:28:39.251588+00
+31	default	0003_alter_email_max_length	2021-08-18 12:28:39.260949+00
+32	social_auth	0003_alter_email_max_length	2021-08-18 12:28:39.262856+00
+33	default	0004_auto_20160423_0400	2021-08-18 12:28:39.284438+00
+34	social_auth	0004_auto_20160423_0400	2021-08-18 12:28:39.285917+00
+35	social_auth	0005_auto_20160727_2333	2021-08-18 12:28:39.296697+00
+36	social_django	0006_partial	2021-08-18 12:28:39.319263+00
+37	social_django	0007_code_timestamp	2021-08-18 12:28:39.331904+00
+38	social_django	0008_partial_timestamp	2021-08-18 12:28:39.34908+00
+39	social_django	0009_auto_20191118_0520	2021-08-18 12:28:39.38853+00
+40	social_django	0010_uid_db_index	2021-08-18 12:28:39.413596+00
+41	social_django	0003_alter_email_max_length	2021-08-18 12:28:39.418635+00
+42	social_django	0002_add_related_name	2021-08-18 12:28:39.422112+00
+43	social_django	0004_auto_20160423_0400	2021-08-18 12:28:39.425341+00
+44	social_django	0001_initial	2021-08-18 12:28:39.430095+00
+45	social_django	0005_auto_20160727_2333	2021-08-18 12:28:39.432378+00
+46	movies	0002_auto_20210827_1308	2021-08-27 15:02:02.164814+00
+\.
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+0nxnnesa86i4q1s5n2vc89qo4td6gksw	.eJxVjEEOwiAQRe_C2hDoDAgu3fcMZICpVA0kpV0Z765NutDtf-_9lwi0rSVsnZcwZ3ERWpx-t0jpwXUH-U711mRqdV3mKHdFHrTLsWV-Xg_376BQL9-anLNo_TkigteelWeAhJwU0IDJ5WQGmGz0jjNZwMlbYyAT62gAjRLvD8mUN1I:1mFhay:R8HWmbBl0P3OBi-iZK_g4-M_5LyleDM8zgNKhDMxdek	2021-08-30 18:44:24.19708+00
+lf97bqmf471l6xexka2w8olrdv4y9fjp	.eJxVjEEOwiAQRe_C2hDoDAgu3fcMZICpVA0kpV0Z765NutDtf-_9lwi0rSVsnZcwZ3ERWpx-t0jpwXUH-U711mRqdV3mKHdFHrTLsWV-Xg_376BQL9-anLNo_TkigteelWeAhJwU0IDJ5WQGmGz0jjNZwMlbYyAT62gAjRLvD8mUN1I:1mFiE9:krT9HHdb4u-UhZjo8YosKJM-BCezNftagQ63flVuV84	2021-08-30 19:24:53.987599+00
+iwrrfn8vcw39nx9mrm6coxkug9ilfpnv	.eJxVjEEOwiAQRe_C2hDoDAgu3fcMZICpVA0kpV0Z765NutDtf-_9lwi0rSVsnZcwZ3ERWpx-t0jpwXUH-U711mRqdV3mKHdFHrTLsWV-Xg_376BQL9-anLNo_TkigteelWeAhJwU0IDJ5WQGmGz0jjNZwMlbYyAT62gAjRLvD8mUN1I:1mFiGQ:ObDqWlrFJUrMIpSvONpcgJcXC9mV9isaLdnpcM9VVIw	2021-08-30 19:27:14.225546+00
+i3owrbp3vjpase1ha8o3hh30sknqzq45	.eJxVjEEOwiAQRe_C2hDoDAgu3fcMZICpVA0kpV0Z765NutDtf-_9lwi0rSVsnZcwZ3ERWpx-t0jpwXUH-U711mRqdV3mKHdFHrTLsWV-Xg_376BQL9-anLNo_TkigteelWeAhJwU0IDJ5WQGmGz0jjNZwMlbYyAT62gAjRLvD8mUN1I:1mFiHg:4dTQjQ4q0rZyMKhUychcT44lWxW-FRKNTjucKJUEeV8	2021-08-30 19:28:32.866154+00
+kabpnh6x9oygo0egchecwngh3qkx3xz1	.eJxVjEEOwiAQRe_C2hDoDAgu3fcMZICpVA0kpV0Z765NutDtf-_9lwi0rSVsnZcwZ3ERWpx-t0jpwXUH-U711mRqdV3mKHdFHrTLsWV-Xg_376BQL9-anLNo_TkigteelWeAhJwU0IDJ5WQGmGz0jjNZwMlbYyAT62gAjRLvD8mUN1I:1mFiOA:zup_BsxAxQZN0fZ_UThZIwp0XoolW20RkXZl_FJ5pbY	2021-08-30 19:35:14.675513+00
+qf9hll7kfmg7nn9ensnd7jh91zm4e4e7	.eJxVjEEOwiAQRe_C2hDoDAgu3fcMZICpVA0kpV0Z765NutDtf-_9lwi0rSVsnZcwZ3ERWpx-t0jpwXUH-U711mRqdV3mKHdFHrTLsWV-Xg_376BQL9-anLNo_TkigteelWeAhJwU0IDJ5WQGmGz0jjNZwMlbYyAT62gAjRLvD8mUN1I:1mFiRX:7Xbr0QMq4r4Gftn5pWTlkCg9xv3OrMvpMusomg9YKqE	2021-08-30 19:38:43.965597+00
+xawjp5ey0ahaaoj7ofo81fc0g4dwtbza	.eJxVjEEOwiAQRe_C2pBhKkzq0r1nIAMDUjWQlHbVeHdt0oVu_3vvb8rzuhS_9jT7SdRFndXpdwscn6nuQB5c703HVpd5CnpX9EG7vjVJr-vh_h0U7uVbA6FFg-IMEFghGyUHGVIyNrHLSAgwDIbIAXEOTqLD7MxoRiYMltT7A8FQNwU:1mGLhO:JX4LGHhbJ3Z4DtdrnBapyZqkBTG3c3YcZRgyChgDR4I	2021-09-01 13:33:42.046966+00
+6a6auww7fdhe8grj09halok3yqbni2t7	.eJxVjMsOwiAUBf-FtSFAc0FcuvcbyH2AVA1NSrtq_Hdt0oVuz8ycTSVcl5rWnuc0iroor06_GyE_c9uBPLDdJ81TW-aR9K7og3Z9myS_rof7d1Cx128NVpwnYhmQuUjgAG44ewRnAEqw3kRbKELIGMVELx6sc84QxcyEoN4f7tk3_g:1mJdNE:5Oc5Z4DCRhjhDckPJSfLB2_9dt1vZ3JB_Y65cbi_fxg	2021-09-10 15:02:28.430277+00
+\.
+
+
+--
+-- Data for Name: movies_actor; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.movies_actor (id, name, age, description, image) FROM stdin;
+1	Нэйтан Грено	46	Натан Грено - американский кинорежиссер, художник-постановщик и писатель, наиболее известный как режиссер мультфильма 2010 года «Рапунцель: Запутанная история» .	actors/Nathan_Greno.jpg
+2	Мэнди Мур	37	Ама́нда Ли «Мэ́нди» Мур (англ. Amanda Leigh «Mandy» Moore, род. 10 апреля 1984) — американская певица, актриса и автор песен. Номинантка на премии «Золотой глобус» и «Эмми».	actors/220px-Mandy_Moore_at_SXSW_2018_25904503147_cropped.jpg
+3	Саша Барон Коэн	49	Са́ша Но́эм Баро́н Ко́эн (англ. Sacha Noam Baron Cohen; род. 13 октября 1971, Хаммерсмит, Лондон, Великобритания) — британский комик, актёр, писатель, режиссёр и кинопродюсер. В первую очередь известен как создатель сатирических персонажей: Али Джи (английского джанглиста), Бората Сагдиева (вымышленного казахского репортёра), Бруно Гехарда (австрийского гомосексуала — ведущего программы мод) и генерал-адмирала Аладина (диктатора африканской страны Вадии). Как и его кумир Питер Селлерс, Барон Коэн использует различные акценты и обличья своих персонажей. В образе своих персонажей он взаимодействует с ничего не подозревающими людьми и высмеивает их. По поводу этих взаимодействий The Observer писал: «его карьера была построена на том, чтобы разводить людей, сохраняя при этом невозмутимое лицо».	actors/220px-Sacha_Baron_Cohen_2011.jpg
+4	Ларри Чарльз	65	Ларри Чарльз (англ. Larry Charles, родился 20 февраля 1956 г.) — американский писатель, режиссёр и продюсер. Он известен как автор сценария для американского комедийного сериала Seinfeld за первые 5 сезонов, являясь автором ряда самых «чернушных» и абсурдных сюжетных линий сериала. Известен как режиссёр фильмов Борат, Religulous, Бруно и Диктатор.	actors/149px-Larry_Charles_TIFF_2008_-_Religulous.jpg
+5	Джо Джонстон	71	Джо Джонстон (англ. Joe Johnston; род. 13 мая 1950, Остине, штат Техас) — американский кинорежиссёр.	actors/274px-Joe_Johnston.jpg
+6	Крис Такер	49	Кристофер Такер (англ. Christopher Tucker; род. 31 августа 1971) — американский комедийный актёр, также выступающий в жанре stand-up comedy. Наиболее известен ролью детектива Джеймса Картера в трилогии «Час пик», «Час пик 2» и «Час пик 3», а также по фильмам «Пятый элемент» и «Мой парень — псих».	actors/220px-Chris_Tucker_by_Gage_Skidmore.jpg
+7	Бретт Ратнер	52	Бретт Ратнер (англ. Brett Ratner; род. 28 марта 1969) — американский кинорежиссёр и продюсер.	actors/200px-Brett_Ratner_2012_Shankbone.jpeg
+8	Леонардо Ди Каприо	46	Леона́рдо Вильге́льм Ди Ка́прио (англ. Leonardo Wilhelm DiCaprio; род. 11 ноября 1974, Лос-Анджелес, США) — американский актёр, продюсер и общественный деятель.	actors/220px-Leonardo_Dicaprio_Cannes_2019.jpg
+9	Кристофер Нолан	51	Кри́стофер Джо́натан Джеймс Но́лан(англ. Christopher Jonathan James Nolan; род. 30 июля 1970, Лондон) — британский и американский кинорежиссёр, сценарист и продюсер. Является одним из самых кассовых режиссёров в истории, а также одним из самых известных и влиятельных кинематографистов своего времени.	actors/230px-Christopher_Nolan_Cannes_2018.jpg
+10	Кристофер Роберт Эванс	40	Кри́стофер Ро́берт Э́ванс (англ. Christopher Robert Evans; род. 13 июня 1981, Бостон, Массачусетс, США) — американский актёр. Мировую известность ему принесла роль Капитана Америки в кинематографической вселенной Marvel. Эванс также исполнил роль Человека-факела в фильме «Фантастическая четвёрка» (2005) и его сиквеле 2007 года.	actors/230px-Chris_Evans_2020_cropped.jpg
+11	Джеки Чан	67	Джеки Чан — гонконгский актёр, каскадёр, кинорежиссёр, продюсер, сценарист, постановщик трюков и боевых сцен, певец, филантроп, мастер боевых искусств. Посол доброй воли ЮНИСЕФ. Кавалер ордена Британской империи, главный режиссёр Чанчуньской киностудии — старейшей киностудии в КНР.	actors/274px-Jackie_Chan_July_2016.jpg
+\.
+
+
+--
+-- Data for Name: movies_category; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.movies_category (id, name, description, url) FROM stdin;
+1	Мультфильмы	Все мультфильмы мира	animated-cartoon
+2	Фильмы	Все фильмы мира	movies
+\.
+
+
+--
+-- Data for Name: movies_genre; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.movies_genre (id, name, description, url) FROM stdin;
+1	Боевик	боевики	action_film
+2	Комедия	комедии	comedy
+\.
+
+
+--
+-- Data for Name: movies_movie; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.movies_movie (id, title, tagline, description, poster, year, country, world_premiere, budget, fees_in_usa, fess_in_world, url, draft, category_id) FROM stdin;
+1	Начало	«Твой разум - место преступления.»	<p>Фантастический триллер, основанный на идее осознанных сновидений. Профессионалы промышленного шпионажа, использующие специальные приёмы для извлечения стратегически важной информации путём вторжения в сны других людей, осваивают новую технику &mdash; &laquo;внедрение&raquo; идеи в сознание человека через его сновидение.</p>	movies/212px-Poster_Inception_film_2010.jpg	2010	США, Великобритания	2010-07-08	160000000	292576195	828322032	Inception	f	2
+2	Час пик	«Самые быстрые руки Востока и самый болтливый язык Запада»	<p>В Лос-Анджелесе злодеи похищают малолетнюю дочь китайского консула, которую в Гонконге учил кунг-фу инспектор Ли. Консул вызывает Ли в Америку, чтобы тот принял участие в освобождении девочки. Агенты ФБР обратились к полиции с просьбой выделить им самого никчемного сотрудника, чтобы тот взял китайца на себя и показал ему достопримечательности, а главное, не позволил вмешиваться в их дела. Им оказывается самый болтливый полицейский Картер. Естественно, после ряда разногласий и недоразумений они объединяют усилия и всерьез берутся за вызволение заложницы.</p>\r\n\r\n<p><iframe frameborder="0" height="360" src="https://www.youtube.com/embed/uuJIJa_OuqY" width="640"></iframe><iframe allowfullscreen="" frameborder="0" height="360" src="https://www.youtube.com/embed/uuJIJa_OuqY" width="640"></iframe></p>	movies/200px-Rush_Hour.jpg	1998	США	1998-09-18	33000000	141186864	244386864	rush-hour	f	2
+3	Час пик 2	«Уста Запада и руки Востока снова!»	<p>Полицейские Ли и Картер прибывают в Гонконг по следам преступников, замышляющих похищение китайских сокровищ и их продажу в США. По мере того как детективы всё больше и больше запутываются в преступном заговоре, поездка от Гонконга до Лос-Анджелеса и Лас-Вегаса оборачивается для них опасным и интересным приключением.</p>	movies/250px-Rush_Hour_2_poster.jpg	2001	Гонконг, США	2001-07-26	90000000	226164286	347325802	rush-hour-2	f	2
+5	Диктатор	-	<p><strong>Героическая история диктатора, который рискует своей жизнью, чтобы ни в коем случае не допустить демократию в свою столь любовно угнетаемую страну.</strong></p>	movies/211px-Постер_фильма_Диктатор.jpg	2012	США	2012-05-16	65000000	59650222	179379533	dictator	f	2
+6	Рапунцель: Запутанная история	«Приключения предпочитают блондинок»	<p>Обаятельный разбойник Флинн путешествует по жизни с легкостью, лишь потому, что он красив, болтлив и удачлив. И, казалось, фортуна всегда на его стороне, пока однажды он не выбирает высокую башню в густой чаще леса в качестве &laquo;спокойного&raquo; убежища. Флинн оказывается связанным по рукам и ногам юной красавицей по имени Рапунцель.</p>\r\n\r\n<p>Если вы думаете, что самое интересное в ней - это 21 метр волшебных золотистых волос, то вы заблуждаетесь! Запертая в башне и отчаянно ищущая приключений, Рапунцель решает использовать Флинна в качестве билета в большой мир. Сначала комичное похищение, затем невинный шантаж - и вот наши герои на воле. Вместе с главными героями в авантюрное путешествие отправятся бравый конь-ищейка Максимус, ручной хамелеон и шайка сумасбродных разбойников.</p>	movies/273px-Rapunzel_poster.jpg	2010	США	2010-11-24	260000000	200821936	591794936	Tangled	f	1
+4	Первый мститель	«Когда патриоты становятся героями»	<p>Стив Роджерс добровольно соглашается принять участие в эксперименте, который превратит его в суперсолдата, известного как Первый мститель. Роджерс вступает в вооруженные силы США вместе с Баки Барнсом и Пегги Картер, чтобы бороться с враждебной организацией ГИДРА, которой управляет безжалостный Красный Череп.</p>	movies/203px-CaptainAmerica.jpg	2011	США	2011-07-19	140000000	176654505	370569774	captain-america	t	2
+\.
+
+
+--
+-- Data for Name: movies_movie_actors; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.movies_movie_actors (id, movie_id, actor_id) FROM stdin;
+1	1	8
+2	2	11
+3	2	6
+4	3	11
+5	3	6
+6	4	10
+7	5	3
+8	6	2
+\.
+
+
+--
+-- Data for Name: movies_movie_directors; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.movies_movie_directors (id, movie_id, actor_id) FROM stdin;
+1	1	9
+2	2	7
+3	3	7
+4	4	5
+5	5	4
+6	6	1
+\.
+
+
+--
+-- Data for Name: movies_movie_genres; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.movies_movie_genres (id, movie_id, genre_id) FROM stdin;
+1	1	1
+2	2	1
+3	2	2
+4	3	1
+5	3	2
+6	4	1
+7	5	2
+8	6	2
+\.
+
+
+--
+-- Data for Name: movies_movieshots; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.movies_movieshots (id, title, description, image, movie_id) FROM stdin;
+1	Начало к1	Начало кадр из фильма	movie_shots/Inception-1.jpeg	1
+2	Начало к2	Начало кадр из фильма	movie_shots/Inception-2.jpeg	1
+3	Начало к3	Начало кадр из фильма	movie_shots/Inception-3.jpeg	1
+4	Час пик к3	Час пик кадр из фильма	movie_shots/Rush-Hour-1.jpeg	2
+5	Час пик к3	Час пик кадр из фильма	movie_shots/Rush-Hour-2.jpeg	2
+6	Час пик к3	Час пик кадр из фильма	movie_shots/Rush-Hour-3.jpeg	2
+7	Час пик 2 к1	Час пик 2 кадр из фильма	movie_shots/Rush-Hour-2-1.jpeg	3
+8	Час пик 2 к2	Час пик 2 кадр из фильма	movie_shots/Rush-Hour-2-2.jpeg	3
+9	Час пик 2 к3	Час пик 2 кадр из фильма	movie_shots/Rush-Hour-2-3.jpeg	3
+10	Первый мститель к1	Первый мститель кадр из фильма	movie_shots/Captain-America-1.jpeg	4
+11	Первый мститель к2	Первый мститель кадр из фильма	movie_shots/Captain-America-2.jpeg	4
+12	Первый мститель к3	Первый мститель кадр из фильма	movie_shots/Captain-America-3.jpeg	4
+13	Диктатор к1	Диктатор кадр из фильма	movie_shots/Dictator-1.jpeg	5
+14	Диктатор к2	Диктатор кадр из фильма	movie_shots/Dictator-2.jpeg	5
+15	Диктатор к3	Диктатор кадр из фильма	movie_shots/Dictator-3.jpeg	5
+16	Рапунцель к1	Рапунцель кадр из мультфильма	movie_shots/Tangled-1.jpeg	6
+17	Рапунцель к2	Рапунцель кадр из мультфильма	movie_shots/Tangled-2.jpeg	6
+18	Рапунцель к3	Рапунцель кадр из мультфильма	movie_shots/Tangled-3.jpeg	6
+\.
+
+
+--
+-- Data for Name: movies_rating; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.movies_rating (id, ip, movie_id, star_id) FROM stdin;
+2	127.0.0.1	5	5
+3	127.0.0.1	2	3
+4	125.125.124.15	1	5
+5	125.125.124.15	2	1
+6	127.0.0.1	6	5
+1	127.0.0.1	1	4
+\.
+
+
+--
+-- Data for Name: movies_ratingstar; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.movies_ratingstar (id, value) FROM stdin;
+1	1
+2	2
+3	3
+4	4
+5	5
+\.
+
+
+--
+-- Data for Name: movies_review; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.movies_review (id, email, name, text, movie_id, parent_id) FROM stdin;
+1	anton@mail.ru	Антон Бандерос	Очень интересный фильм!	1	\N
+2	iluxa@gmail.com	Илья Деревенько	РЖАКА	5	\N
+3	anton@mail.ru	Антон Бандерос	Буду рекомендовать друзьям!!!	1	\N
+4	anton@mail.ru	Антон Бандерос	А концовка вообще бомба!!!!!	1	\N
+5	andrey@mail.ru	Андрей Украинко	Антон Бандерос, согласен	1	4
+6	iluxa@gmail.com	Илья Деревенько	Антон Бандерос, я тоже :)	1	3
+7	viktor@gmail.com	Виктор Чеченков	Антон Бандерос, а я нет!	1	3
+8	marina@mail.ru	Марина	Какой хороший мультик!!!!	6	\N
+10	petrov@gmail.com	Петр Первый	Мне очень понравился фильм!!!	1	\N
+11	ivan@mail.ru	Иван Грозный	Мне тоже. Очень интересный фильм :)	1	10
+12	vladimir@mail.ru	Владимир Князь	Лео нужен оскар!!!	1	\N
+13	veronika@mail.ru	Вероника	Чур я рапунцель	6	\N
+14	ira@gmail.com	Ира Калашникова	Я рада, что такая хорошая концовка	6	\N
+15	anton@gmail.com	Антон Работягов	Нет я!!!	6	13
+\.
+
+
+--
+-- Data for Name: oauth2_provider_accesstoken; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.oauth2_provider_accesstoken (id, token, expires, scope, application_id, user_id, created, updated, source_refresh_token_id, id_token_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth2_provider_application; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.oauth2_provider_application (id, client_id, redirect_uris, client_type, authorization_grant_type, client_secret, name, user_id, skip_authorization, created, updated, algorithm) FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth2_provider_grant; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.oauth2_provider_grant (id, code, expires, redirect_uri, scope, application_id, user_id, created, updated, code_challenge, code_challenge_method, nonce, claims) FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth2_provider_idtoken; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.oauth2_provider_idtoken (id, jti, expires, scope, created, updated, application_id, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth2_provider_refreshtoken; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.oauth2_provider_refreshtoken (id, token, access_token_id, application_id, user_id, created, updated, revoked) FROM stdin;
+\.
+
+
+--
+-- Data for Name: social_auth_association; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.social_auth_association (id, server_url, handle, secret, issued, lifetime, assoc_type) FROM stdin;
+\.
+
+
+--
+-- Data for Name: social_auth_code; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.social_auth_code (id, email, code, verified, "timestamp") FROM stdin;
+\.
+
+
+--
+-- Data for Name: social_auth_nonce; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.social_auth_nonce (id, server_url, "timestamp", salt) FROM stdin;
+\.
+
+
+--
+-- Data for Name: social_auth_partial; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.social_auth_partial (id, token, next_step, backend, data, "timestamp") FROM stdin;
+\.
+
+
+--
+-- Data for Name: social_auth_usersocialauth; Type: TABLE DATA; Schema: public; Owner: drfuser
+--
+
+COPY public.social_auth_usersocialauth (id, provider, uid, extra_data, user_id, created, modified) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 104, true);
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.auth_user_id_seq', 6, true);
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 52, true);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 26, true);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 46, true);
+
+
+--
+-- Name: movies_actor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.movies_actor_id_seq', 11, true);
+
+
+--
+-- Name: movies_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.movies_category_id_seq', 2, true);
+
+
+--
+-- Name: movies_genre_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.movies_genre_id_seq', 2, true);
+
+
+--
+-- Name: movies_movie_actors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.movies_movie_actors_id_seq', 8, true);
+
+
+--
+-- Name: movies_movie_directors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.movies_movie_directors_id_seq', 6, true);
+
+
+--
+-- Name: movies_movie_genres_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.movies_movie_genres_id_seq', 8, true);
+
+
+--
+-- Name: movies_movie_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.movies_movie_id_seq', 6, true);
+
+
+--
+-- Name: movies_movieshots_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.movies_movieshots_id_seq', 18, true);
+
+
+--
+-- Name: movies_rating_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.movies_rating_id_seq', 6, true);
+
+
+--
+-- Name: movies_ratingstar_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.movies_ratingstar_id_seq', 5, true);
+
+
+--
+-- Name: movies_review_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.movies_review_id_seq', 15, true);
+
+
+--
+-- Name: oauth2_provider_accesstoken_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.oauth2_provider_accesstoken_id_seq', 1, true);
+
+
+--
+-- Name: oauth2_provider_application_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.oauth2_provider_application_id_seq', 1, true);
+
+
+--
+-- Name: oauth2_provider_grant_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.oauth2_provider_grant_id_seq', 1, false);
+
+
+--
+-- Name: oauth2_provider_idtoken_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.oauth2_provider_idtoken_id_seq', 1, false);
+
+
+--
+-- Name: oauth2_provider_refreshtoken_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.oauth2_provider_refreshtoken_id_seq', 1, true);
+
+
+--
+-- Name: social_auth_association_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.social_auth_association_id_seq', 1, false);
+
+
+--
+-- Name: social_auth_code_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.social_auth_code_id_seq', 1, false);
+
+
+--
+-- Name: social_auth_nonce_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.social_auth_nonce_id_seq', 1, false);
+
+
+--
+-- Name: social_auth_partial_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.social_auth_partial_id_seq', 1, false);
+
+
+--
+-- Name: social_auth_usersocialauth_id_seq; Type: SEQUENCE SET; Schema: public; Owner: drfuser
+--
+
+SELECT pg_catalog.setval('public.social_auth_usersocialauth_id_seq', 1, true);
+
+
+--
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_group_id_94350c0c_uniq; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_94350c0c_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_permission_id_14a6b632_uniq; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_14a6b632_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: authtoken_token authtoken_token_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.authtoken_token
+    ADD CONSTRAINT authtoken_token_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: authtoken_token authtoken_token_user_id_key; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.authtoken_token
+    ADD CONSTRAINT authtoken_token_user_id_key UNIQUE (user_id);
+
+
+--
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: movies_actor movies_actor_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_actor
+    ADD CONSTRAINT movies_actor_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: movies_category movies_category_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_category
+    ADD CONSTRAINT movies_category_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: movies_category movies_category_url_key; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_category
+    ADD CONSTRAINT movies_category_url_key UNIQUE (url);
+
+
+--
+-- Name: movies_genre movies_genre_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_genre
+    ADD CONSTRAINT movies_genre_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: movies_genre movies_genre_url_key; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_genre
+    ADD CONSTRAINT movies_genre_url_key UNIQUE (url);
+
+
+--
+-- Name: movies_movie_actors movies_movie_actors_movie_id_actor_id_73463e17_uniq; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie_actors
+    ADD CONSTRAINT movies_movie_actors_movie_id_actor_id_73463e17_uniq UNIQUE (movie_id, actor_id);
+
+
+--
+-- Name: movies_movie_actors movies_movie_actors_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie_actors
+    ADD CONSTRAINT movies_movie_actors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: movies_movie_directors movies_movie_directors_movie_id_actor_id_a1932843_uniq; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie_directors
+    ADD CONSTRAINT movies_movie_directors_movie_id_actor_id_a1932843_uniq UNIQUE (movie_id, actor_id);
+
+
+--
+-- Name: movies_movie_directors movies_movie_directors_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie_directors
+    ADD CONSTRAINT movies_movie_directors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: movies_movie_genres movies_movie_genres_movie_id_genre_id_5ff3c723_uniq; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie_genres
+    ADD CONSTRAINT movies_movie_genres_movie_id_genre_id_5ff3c723_uniq UNIQUE (movie_id, genre_id);
+
+
+--
+-- Name: movies_movie_genres movies_movie_genres_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie_genres
+    ADD CONSTRAINT movies_movie_genres_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: movies_movie movies_movie_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie
+    ADD CONSTRAINT movies_movie_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: movies_movie movies_movie_url_key; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie
+    ADD CONSTRAINT movies_movie_url_key UNIQUE (url);
+
+
+--
+-- Name: movies_movieshots movies_movieshots_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movieshots
+    ADD CONSTRAINT movies_movieshots_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: movies_rating movies_rating_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_rating
+    ADD CONSTRAINT movies_rating_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: movies_ratingstar movies_ratingstar_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_ratingstar
+    ADD CONSTRAINT movies_ratingstar_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: movies_review movies_review_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_review
+    ADD CONSTRAINT movies_review_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth2_provider_accesstoken oauth2_provider_accesstoken_id_token_id_key; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_accesstoken
+    ADD CONSTRAINT oauth2_provider_accesstoken_id_token_id_key UNIQUE (id_token_id);
+
+
+--
+-- Name: oauth2_provider_accesstoken oauth2_provider_accesstoken_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_accesstoken
+    ADD CONSTRAINT oauth2_provider_accesstoken_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth2_provider_accesstoken oauth2_provider_accesstoken_source_refresh_token_id_key; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_accesstoken
+    ADD CONSTRAINT oauth2_provider_accesstoken_source_refresh_token_id_key UNIQUE (source_refresh_token_id);
+
+
+--
+-- Name: oauth2_provider_accesstoken oauth2_provider_accesstoken_token_key; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_accesstoken
+    ADD CONSTRAINT oauth2_provider_accesstoken_token_key UNIQUE (token);
+
+
+--
+-- Name: oauth2_provider_application oauth2_provider_application_client_id_key; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_application
+    ADD CONSTRAINT oauth2_provider_application_client_id_key UNIQUE (client_id);
+
+
+--
+-- Name: oauth2_provider_application oauth2_provider_application_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_application
+    ADD CONSTRAINT oauth2_provider_application_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth2_provider_grant oauth2_provider_grant_code_key; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_grant
+    ADD CONSTRAINT oauth2_provider_grant_code_key UNIQUE (code);
+
+
+--
+-- Name: oauth2_provider_grant oauth2_provider_grant_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_grant
+    ADD CONSTRAINT oauth2_provider_grant_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth2_provider_idtoken oauth2_provider_idtoken_jti_key; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_idtoken
+    ADD CONSTRAINT oauth2_provider_idtoken_jti_key UNIQUE (jti);
+
+
+--
+-- Name: oauth2_provider_idtoken oauth2_provider_idtoken_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_idtoken
+    ADD CONSTRAINT oauth2_provider_idtoken_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth2_provider_refreshtoken oauth2_provider_refreshtoken_access_token_id_key; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_refreshtoken
+    ADD CONSTRAINT oauth2_provider_refreshtoken_access_token_id_key UNIQUE (access_token_id);
+
+
+--
+-- Name: oauth2_provider_refreshtoken oauth2_provider_refreshtoken_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_refreshtoken
+    ADD CONSTRAINT oauth2_provider_refreshtoken_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth2_provider_refreshtoken oauth2_provider_refreshtoken_token_revoked_af8a5134_uniq; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_refreshtoken
+    ADD CONSTRAINT oauth2_provider_refreshtoken_token_revoked_af8a5134_uniq UNIQUE (token, revoked);
+
+
+--
+-- Name: social_auth_association social_auth_association_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.social_auth_association
+    ADD CONSTRAINT social_auth_association_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: social_auth_association social_auth_association_server_url_handle_078befa2_uniq; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.social_auth_association
+    ADD CONSTRAINT social_auth_association_server_url_handle_078befa2_uniq UNIQUE (server_url, handle);
+
+
+--
+-- Name: social_auth_code social_auth_code_email_code_801b2d02_uniq; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.social_auth_code
+    ADD CONSTRAINT social_auth_code_email_code_801b2d02_uniq UNIQUE (email, code);
+
+
+--
+-- Name: social_auth_code social_auth_code_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.social_auth_code
+    ADD CONSTRAINT social_auth_code_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: social_auth_nonce social_auth_nonce_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.social_auth_nonce
+    ADD CONSTRAINT social_auth_nonce_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: social_auth_nonce social_auth_nonce_server_url_timestamp_salt_f6284463_uniq; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.social_auth_nonce
+    ADD CONSTRAINT social_auth_nonce_server_url_timestamp_salt_f6284463_uniq UNIQUE (server_url, "timestamp", salt);
+
+
+--
+-- Name: social_auth_partial social_auth_partial_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.social_auth_partial
+    ADD CONSTRAINT social_auth_partial_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: social_auth_usersocialauth social_auth_usersocialauth_pkey; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.social_auth_usersocialauth
+    ADD CONSTRAINT social_auth_usersocialauth_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: social_auth_usersocialauth social_auth_usersocialauth_provider_uid_e6b5e668_uniq; Type: CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.social_auth_usersocialauth
+    ADD CONSTRAINT social_auth_usersocialauth_provider_uid_e6b5e668_uniq UNIQUE (provider, uid);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_group_id_97559544; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX auth_user_groups_group_id_97559544 ON public.auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_user_id_6a12ed8b; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX auth_user_groups_user_id_6a12ed8b ON public.auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_permission_id_1fbb5f2c; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX auth_user_user_permissions_permission_id_1fbb5f2c ON public.auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_a95ead1b; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX auth_user_user_permissions_user_id_a95ead1b ON public.auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: auth_user_username_6821ab7c_like; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX auth_user_username_6821ab7c_like ON public.auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: authtoken_token_key_10f0b77e_like; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX authtoken_token_key_10f0b77e_like ON public.authtoken_token USING btree (key varchar_pattern_ops);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: movies_category_url_2dc68cc8_like; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX movies_category_url_2dc68cc8_like ON public.movies_category USING btree (url varchar_pattern_ops);
+
+
+--
+-- Name: movies_genre_url_4b79c3a9_like; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX movies_genre_url_4b79c3a9_like ON public.movies_genre USING btree (url varchar_pattern_ops);
+
+
+--
+-- Name: movies_movie_actors_actor_id_44828aa1; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX movies_movie_actors_actor_id_44828aa1 ON public.movies_movie_actors USING btree (actor_id);
+
+
+--
+-- Name: movies_movie_actors_movie_id_baed65f3; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX movies_movie_actors_movie_id_baed65f3 ON public.movies_movie_actors USING btree (movie_id);
+
+
+--
+-- Name: movies_movie_category_id_d3487bd9; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX movies_movie_category_id_d3487bd9 ON public.movies_movie USING btree (category_id);
+
+
+--
+-- Name: movies_movie_directors_actor_id_d63f385f; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX movies_movie_directors_actor_id_d63f385f ON public.movies_movie_directors USING btree (actor_id);
+
+
+--
+-- Name: movies_movie_directors_movie_id_7f54bd58; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX movies_movie_directors_movie_id_7f54bd58 ON public.movies_movie_directors USING btree (movie_id);
+
+
+--
+-- Name: movies_movie_genres_genre_id_c3609db2; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX movies_movie_genres_genre_id_c3609db2 ON public.movies_movie_genres USING btree (genre_id);
+
+
+--
+-- Name: movies_movie_genres_movie_id_ff5e55a1; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX movies_movie_genres_movie_id_ff5e55a1 ON public.movies_movie_genres USING btree (movie_id);
+
+
+--
+-- Name: movies_movie_url_1d87d71d_like; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX movies_movie_url_1d87d71d_like ON public.movies_movie USING btree (url varchar_pattern_ops);
+
+
+--
+-- Name: movies_movieshots_movie_id_f38f4fa4; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX movies_movieshots_movie_id_f38f4fa4 ON public.movies_movieshots USING btree (movie_id);
+
+
+--
+-- Name: movies_rating_movie_id_697b1621; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX movies_rating_movie_id_697b1621 ON public.movies_rating USING btree (movie_id);
+
+
+--
+-- Name: movies_rating_star_id_8998a42d; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX movies_rating_star_id_8998a42d ON public.movies_rating USING btree (star_id);
+
+
+--
+-- Name: movies_review_movie_id_3f8bd27f; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX movies_review_movie_id_3f8bd27f ON public.movies_review USING btree (movie_id);
+
+
+--
+-- Name: movies_review_parent_id_9ae0962a; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX movies_review_parent_id_9ae0962a ON public.movies_review USING btree (parent_id);
+
+
+--
+-- Name: oauth2_provider_accesstoken_application_id_b22886e1; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX oauth2_provider_accesstoken_application_id_b22886e1 ON public.oauth2_provider_accesstoken USING btree (application_id);
+
+
+--
+-- Name: oauth2_provider_accesstoken_token_8af090f8_like; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX oauth2_provider_accesstoken_token_8af090f8_like ON public.oauth2_provider_accesstoken USING btree (token varchar_pattern_ops);
+
+
+--
+-- Name: oauth2_provider_accesstoken_user_id_6e4c9a65; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX oauth2_provider_accesstoken_user_id_6e4c9a65 ON public.oauth2_provider_accesstoken USING btree (user_id);
+
+
+--
+-- Name: oauth2_provider_application_client_id_03f0cc84_like; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX oauth2_provider_application_client_id_03f0cc84_like ON public.oauth2_provider_application USING btree (client_id varchar_pattern_ops);
+
+
+--
+-- Name: oauth2_provider_application_client_secret_53133678; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX oauth2_provider_application_client_secret_53133678 ON public.oauth2_provider_application USING btree (client_secret);
+
+
+--
+-- Name: oauth2_provider_application_client_secret_53133678_like; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX oauth2_provider_application_client_secret_53133678_like ON public.oauth2_provider_application USING btree (client_secret varchar_pattern_ops);
+
+
+--
+-- Name: oauth2_provider_application_user_id_79829054; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX oauth2_provider_application_user_id_79829054 ON public.oauth2_provider_application USING btree (user_id);
+
+
+--
+-- Name: oauth2_provider_grant_application_id_81923564; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX oauth2_provider_grant_application_id_81923564 ON public.oauth2_provider_grant USING btree (application_id);
+
+
+--
+-- Name: oauth2_provider_grant_code_49ab4ddf_like; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX oauth2_provider_grant_code_49ab4ddf_like ON public.oauth2_provider_grant USING btree (code varchar_pattern_ops);
+
+
+--
+-- Name: oauth2_provider_grant_user_id_e8f62af8; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX oauth2_provider_grant_user_id_e8f62af8 ON public.oauth2_provider_grant USING btree (user_id);
+
+
+--
+-- Name: oauth2_provider_idtoken_application_id_08c5ff4f; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX oauth2_provider_idtoken_application_id_08c5ff4f ON public.oauth2_provider_idtoken USING btree (application_id);
+
+
+--
+-- Name: oauth2_provider_idtoken_user_id_dd512b59; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX oauth2_provider_idtoken_user_id_dd512b59 ON public.oauth2_provider_idtoken USING btree (user_id);
+
+
+--
+-- Name: oauth2_provider_refreshtoken_application_id_2d1c311b; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX oauth2_provider_refreshtoken_application_id_2d1c311b ON public.oauth2_provider_refreshtoken USING btree (application_id);
+
+
+--
+-- Name: oauth2_provider_refreshtoken_user_id_da837fce; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX oauth2_provider_refreshtoken_user_id_da837fce ON public.oauth2_provider_refreshtoken USING btree (user_id);
+
+
+--
+-- Name: social_auth_code_code_a2393167; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX social_auth_code_code_a2393167 ON public.social_auth_code USING btree (code);
+
+
+--
+-- Name: social_auth_code_code_a2393167_like; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX social_auth_code_code_a2393167_like ON public.social_auth_code USING btree (code varchar_pattern_ops);
+
+
+--
+-- Name: social_auth_code_timestamp_176b341f; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX social_auth_code_timestamp_176b341f ON public.social_auth_code USING btree ("timestamp");
+
+
+--
+-- Name: social_auth_partial_timestamp_50f2119f; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX social_auth_partial_timestamp_50f2119f ON public.social_auth_partial USING btree ("timestamp");
+
+
+--
+-- Name: social_auth_partial_token_3017fea3; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX social_auth_partial_token_3017fea3 ON public.social_auth_partial USING btree (token);
+
+
+--
+-- Name: social_auth_partial_token_3017fea3_like; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX social_auth_partial_token_3017fea3_like ON public.social_auth_partial USING btree (token varchar_pattern_ops);
+
+
+--
+-- Name: social_auth_usersocialauth_uid_796e51dc; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX social_auth_usersocialauth_uid_796e51dc ON public.social_auth_usersocialauth USING btree (uid);
+
+
+--
+-- Name: social_auth_usersocialauth_uid_796e51dc_like; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX social_auth_usersocialauth_uid_796e51dc_like ON public.social_auth_usersocialauth USING btree (uid varchar_pattern_ops);
+
+
+--
+-- Name: social_auth_usersocialauth_user_id_17d28448; Type: INDEX; Schema: public; Owner: drfuser
+--
+
+CREATE INDEX social_auth_usersocialauth_user_id_17d28448 ON public.social_auth_usersocialauth USING btree (user_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_97559544_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_6a12ed8b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: authtoken_token authtoken_token_user_id_35299eff_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.authtoken_token
+    ADD CONSTRAINT authtoken_token_user_id_35299eff_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: movies_movie_actors movies_movie_actors_actor_id_44828aa1_fk_movies_actor_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie_actors
+    ADD CONSTRAINT movies_movie_actors_actor_id_44828aa1_fk_movies_actor_id FOREIGN KEY (actor_id) REFERENCES public.movies_actor(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: movies_movie_actors movies_movie_actors_movie_id_baed65f3_fk_movies_movie_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie_actors
+    ADD CONSTRAINT movies_movie_actors_movie_id_baed65f3_fk_movies_movie_id FOREIGN KEY (movie_id) REFERENCES public.movies_movie(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: movies_movie movies_movie_category_id_d3487bd9_fk_movies_category_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie
+    ADD CONSTRAINT movies_movie_category_id_d3487bd9_fk_movies_category_id FOREIGN KEY (category_id) REFERENCES public.movies_category(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: movies_movie_directors movies_movie_directors_actor_id_d63f385f_fk_movies_actor_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie_directors
+    ADD CONSTRAINT movies_movie_directors_actor_id_d63f385f_fk_movies_actor_id FOREIGN KEY (actor_id) REFERENCES public.movies_actor(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: movies_movie_directors movies_movie_directors_movie_id_7f54bd58_fk_movies_movie_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie_directors
+    ADD CONSTRAINT movies_movie_directors_movie_id_7f54bd58_fk_movies_movie_id FOREIGN KEY (movie_id) REFERENCES public.movies_movie(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: movies_movie_genres movies_movie_genres_genre_id_c3609db2_fk_movies_genre_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie_genres
+    ADD CONSTRAINT movies_movie_genres_genre_id_c3609db2_fk_movies_genre_id FOREIGN KEY (genre_id) REFERENCES public.movies_genre(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: movies_movie_genres movies_movie_genres_movie_id_ff5e55a1_fk_movies_movie_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movie_genres
+    ADD CONSTRAINT movies_movie_genres_movie_id_ff5e55a1_fk_movies_movie_id FOREIGN KEY (movie_id) REFERENCES public.movies_movie(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: movies_movieshots movies_movieshots_movie_id_f38f4fa4_fk_movies_movie_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_movieshots
+    ADD CONSTRAINT movies_movieshots_movie_id_f38f4fa4_fk_movies_movie_id FOREIGN KEY (movie_id) REFERENCES public.movies_movie(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: movies_rating movies_rating_movie_id_697b1621_fk_movies_movie_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_rating
+    ADD CONSTRAINT movies_rating_movie_id_697b1621_fk_movies_movie_id FOREIGN KEY (movie_id) REFERENCES public.movies_movie(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: movies_rating movies_rating_star_id_8998a42d_fk_movies_ratingstar_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_rating
+    ADD CONSTRAINT movies_rating_star_id_8998a42d_fk_movies_ratingstar_id FOREIGN KEY (star_id) REFERENCES public.movies_ratingstar(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: movies_review movies_review_movie_id_3f8bd27f_fk_movies_movie_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_review
+    ADD CONSTRAINT movies_review_movie_id_3f8bd27f_fk_movies_movie_id FOREIGN KEY (movie_id) REFERENCES public.movies_movie(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: movies_review movies_review_parent_id_9ae0962a_fk_movies_review_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.movies_review
+    ADD CONSTRAINT movies_review_parent_id_9ae0962a_fk_movies_review_id FOREIGN KEY (parent_id) REFERENCES public.movies_review(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_accesstoken oauth2_provider_acce_application_id_b22886e1_fk_oauth2_pr; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_accesstoken
+    ADD CONSTRAINT oauth2_provider_acce_application_id_b22886e1_fk_oauth2_pr FOREIGN KEY (application_id) REFERENCES public.oauth2_provider_application(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_accesstoken oauth2_provider_acce_id_token_id_85db651b_fk_oauth2_pr; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_accesstoken
+    ADD CONSTRAINT oauth2_provider_acce_id_token_id_85db651b_fk_oauth2_pr FOREIGN KEY (id_token_id) REFERENCES public.oauth2_provider_idtoken(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_accesstoken oauth2_provider_acce_source_refresh_token_e66fbc72_fk_oauth2_pr; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_accesstoken
+    ADD CONSTRAINT oauth2_provider_acce_source_refresh_token_e66fbc72_fk_oauth2_pr FOREIGN KEY (source_refresh_token_id) REFERENCES public.oauth2_provider_refreshtoken(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_accesstoken oauth2_provider_accesstoken_user_id_6e4c9a65_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_accesstoken
+    ADD CONSTRAINT oauth2_provider_accesstoken_user_id_6e4c9a65_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_application oauth2_provider_application_user_id_79829054_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_application
+    ADD CONSTRAINT oauth2_provider_application_user_id_79829054_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_grant oauth2_provider_gran_application_id_81923564_fk_oauth2_pr; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_grant
+    ADD CONSTRAINT oauth2_provider_gran_application_id_81923564_fk_oauth2_pr FOREIGN KEY (application_id) REFERENCES public.oauth2_provider_application(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_grant oauth2_provider_grant_user_id_e8f62af8_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_grant
+    ADD CONSTRAINT oauth2_provider_grant_user_id_e8f62af8_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_idtoken oauth2_provider_idto_application_id_08c5ff4f_fk_oauth2_pr; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_idtoken
+    ADD CONSTRAINT oauth2_provider_idto_application_id_08c5ff4f_fk_oauth2_pr FOREIGN KEY (application_id) REFERENCES public.oauth2_provider_application(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_idtoken oauth2_provider_idtoken_user_id_dd512b59_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_idtoken
+    ADD CONSTRAINT oauth2_provider_idtoken_user_id_dd512b59_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_refreshtoken oauth2_provider_refr_access_token_id_775e84e8_fk_oauth2_pr; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_refreshtoken
+    ADD CONSTRAINT oauth2_provider_refr_access_token_id_775e84e8_fk_oauth2_pr FOREIGN KEY (access_token_id) REFERENCES public.oauth2_provider_accesstoken(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_refreshtoken oauth2_provider_refr_application_id_2d1c311b_fk_oauth2_pr; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_refreshtoken
+    ADD CONSTRAINT oauth2_provider_refr_application_id_2d1c311b_fk_oauth2_pr FOREIGN KEY (application_id) REFERENCES public.oauth2_provider_application(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_refreshtoken oauth2_provider_refreshtoken_user_id_da837fce_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.oauth2_provider_refreshtoken
+    ADD CONSTRAINT oauth2_provider_refreshtoken_user_id_da837fce_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: social_auth_usersocialauth social_auth_usersocialauth_user_id_17d28448_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: drfuser
+--
+
+ALTER TABLE ONLY public.social_auth_usersocialauth
+    ADD CONSTRAINT social_auth_usersocialauth_user_id_17d28448_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
